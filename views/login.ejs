@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<!-- Include Head -->
+<%- include('./partials/head') %>
+
+    <body>
+        <!-- Header -->
+        <% if (locals.user !=undefined) { %>
+            <%- include('./partials/headerLogueado') %>
+                <% } else { %>
+                    <%- include('./partials/header') %>
+                          <% } %>
+                            <!-- /Header -->
+
+                            <!-- Novedades -->
+                            <div class="container products-wrapper">
+                                <div class="row">
+                                    <div class="col-12">
+                                        <h2 class="products-title">Ingresar</h2>
+                                    </div>
+
+                                    <!-- Show the "ultimos" products -->
+                                    <form class='formulario' action="/user/login" method="POST">
+                                        <label class='LabelForm' id="email">Email:</label>
+
+                                        <input class='CampoForm' type="email" name="email" value="">
+                                        <% if (locals.errors && errors.email) { %>
+                                            <p class="error">
+                                                <%= errors.email.msg %>
+                                            </p>
+                                            <% } %>
+
+                                                <label class='LabelForm' id="contrasena">Contraseña:</label>
+
+                                                <input class='CampoForm' type="password" name="password" value="">
+                                                <% if (locals.errors && errors.password) { %>
+                                                    <p class="error">
+                                                        <%= errors.password.msg %>
+                                                    </p>
+                                                    <% } %>
+                                                        <label class='LabelForm' id="recuerdame">Recuerdame
+
+                                                            <input class='CampoForm' type="checkbox" name="rememberme"
+                                                                value=""></label>
+
+                                                        <button class="button">Iniciar Sesion</button>
+                                    </form>
+
+                                    <!-- footer -->
+                                    <%- include('./partials/footer')%>
+                                        <!-- /footer -->
+
+    </body>
+
+</html>

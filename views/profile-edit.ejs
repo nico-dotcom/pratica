@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="es">
+<!-- Include Head -->
+<%- include('./partials/head') %>
+
+    <body>
+
+        <!-- Header -->
+        <% if (locals.user !=undefined) { %>
+            <%- include('./partials/headerLogueado') %>
+                <% } else { %>
+                    <%- include('./partials/header') %>
+                          <% } %>
+                            <!-- /Header -->
+
+                            <!-- Novedades -->
+                            <div class="container products-wrapper">
+                                <div class="row">
+                                    <div class="col-12">
+                                        <h2 class="products-title">Editar mi perfil</h2>
+                                    </div>
+                                    <!-- Show the "ultimos" products -->
+                                    <form class='formulario' action="/user/profile/update" method="POST">
+
+                                        <input type="hidden" name="userId" value="<%= lista.id_usuario %>">
+
+                                        <label class='LabelForm'> Email:</label>
+                                        <input class='CampoForm' id="mailUsuario" type="email" name="email"
+                                            value="<%= lista.email %>">
+                                        <% if (locals.errors && errors.email) { %>
+                                            <p class="error">
+                                                <%= errors.email.msg %>
+                                            </p>
+                                            <% } %>
+
+                                                <label class='LabelForm'> Nombre usuario:</label>
+                                                <input class='CampoForm' id="usuarioUsuario" type="text"
+                                                    name="nombre_usuario" value="<%= lista.nombre_usuario %>">
+                                                <% if (locals.errors && errors.nombre_usuario) { %>
+                                                    <p class="error">
+                                                        <%= errors.nombre_usuario.msg %>
+                                                    </p>
+                                                    <% } %>
+                                                        <label class='LabelForm'> Contraseña:</label>
+                                                        <input class='CampoForm' id="contrasenaUsuario" type="password"
+                                                            name="pass" value="">
+                                                        <% if (locals.errors && errors.pass) { %>
+                                                            <p class="error">
+                                                                <%= errors.pass.msg %>
+                                                            </p>
+                                                            <% } %>
+
+                                                                <label class='LabelForm'> Fecha de nacimiento:</label>
+                                                                <input class='CampoForm' id="fechaUsuario" type="date"
+                                                                    name="fecha" value="<%= lista.fecha %>">
+
+
+                                                                <label class='LabelForm'> Número de documento:</label>
+                                                                <input class='CampoForm' id="documentoUsuario"
+                                                                    type="number" name="dni" value="<%= lista.dni %>">
+
+                                                                <label class='LabelForm'> Foto de perfil: </label>
+                                                                <input class='CampoForm' id="fotoPerfilUsuarioText"
+                                                                    type="text" name="foto" value="<%= lista.foto %>">
+
+
+                                                                <button class="button">Editar usuario</button>
+                                    </form>
+
+                                    <!-- footer -->
+                                    <%- include('./partials/footer')%>
+                                        <!-- /footer -->
+
+    </body>
+
+</html>

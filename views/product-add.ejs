@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="es">
+<!-- Include Head -->
+<%- include('./partials/head') %>
+
+<body>
+     <!-- Header -->
+     <% if (locals.user !=undefined) { %>
+        <%- include('./partials/headerLogueado') %>
+            <% } else { %>
+                <%- include('./partials/header') %>
+                      <% } %>
+                        <!-- /Header -->
+
+    <!-- Novedades -->
+    <div class="container products-wrapper">
+        <div class="row">
+            <div class="col-12">
+                <h2 class="products-title">Agregar productos</h2>
+            </div>
+
+            <!-- Show the "ultimos" products -->
+            <form class='formulario' action="/product/add" method="POST">
+                <label class= 'LabelForm' >Ruta del producto</label>
+                <input class= 'CampoForm' type="text" id="ImagenProductoAgregado" accept=".jpg, .jpeg, .png" name="imagen_producto" >
+                <% if (locals.errors && errors.imagen_producto) { %>
+                    <p class="error"><%= errors.imagen_producto.msg %></p>
+                <% } %>
+
+                <label class= 'LabelForm' >Nombre del producto</label>
+                <input class= 'CampoForm' type="text" id="NombreDelProductoAgregado" value="" name="nombre_producto">
+                <% if (locals.errors && errors.nombre_producto) { %>
+                    <p class="error"><%= errors.nombre_producto.msg %></p>
+                <% } %>
+               
+                <label class= 'LabelForm' >Descripcion del Producto Agregado</label>
+                <textarea class= 'CampoForm' id="DescripcionProductoAgregado" name="descripcion" ></textarea>  
+                <% if (locals.errors && errors.descripcion) { %>
+                    <p class="error"><%= errors.descripcion.msg %></p>
+                <% } %>
+               
+                <button class="button">Agregar Producto</button>
+            </form>
+
+    <!-- footer -->
+    <%- include('./partials/footer')%>
+    <!-- /footer -->
+
+</body>
+</html>

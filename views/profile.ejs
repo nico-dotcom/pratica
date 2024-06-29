@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="es">
+<!-- Include Head -->
+<%- include('./partials/head') %>
+
+<body>
+	
+     <!-- Header -->
+     <% if (locals.user !=undefined) { %>
+        <%- include('./partials/headerLogueado') %>
+            <% } else { %>
+                <%- include('./partials/header') %>
+                      <% } %>
+                        <!-- /Header -->
+
+    <!-- Datos del usuario -->
+    <section class="info-usuario container products-wrapper">
+        <div class="row">
+            <div class="img-container offset-3 col-2">
+                <img src = <%= lista.foto %> >
+                        </div>
+            <div class="data-container col-6">
+                <div class="d-flex align-items-center ">
+                    <h1 class="main-title"><%= lista.nombre_usuario%>
+                        <% if (locals.user != undefined ) { %>
+
+                        <% if (locals.user.id_usuario == lista.id_usuario ) { %>
+                        <a href="/user/profile-edit/<%= lista.id_usuario %>">
+                            <i class="fas fa-cog"></i>
+                        </a>
+                        <% }  %>
+                        <% }  %>
+
+                    </h1>
+                    <a class="btn mt-3 ml-4" href="">SEGUIR</a>
+                </div>
+                <div>
+                    <ul class="">
+                        <li><%= lista.email %> </li>
+                        <li><%= lista.Producto.length %> productos</li>
+                        <li>200 seguidores</li>
+                        <li><%= lista.Comentario.length %></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- /Datos del usuario -->
+    
+
+<!-- Más comentados -->
+<div class="container products-wrapper">
+    <div class="row">
+        <div class="col-12">
+            <h2 class="products-title">Productos de este usuario</h2>
+        </div>
+        <!-- Show the "ultimos" products -->
+        <% for (let i = 0; i < lista.Producto.length; i++) { %>
+            <div class="col-12 col-sm-6 col-lg-3">
+                <section class="product-box">
+                    <a href="/product/id/<%= lista.Producto[i].id_producto %>">
+                        <figure class="product-box_image">
+                            <img src= <%= lista.Producto[i].imagen_producto %> alt="cafetera moulinex">
+                        </figure>
+                        <article class="product-box_data">
+                            <h2><%= lista.Producto[i].nombre_producto%></h2>
+                            <p><%= lista.Producto[i].descripcion %></p>
+                            <p>Comentarios: <%= lista.Producto[i].Comentario.length %></p>
+
+                        </article>
+                    </a>
+                </section>
+            </div>
+            <%} %>
+   
+<!-- /Más comentados -->
+
+    <!-- footer -->
+    <%- include('./partials/footer')%>
+    <!-- /footer -->
+
+</body>
+</html>
+
+
+

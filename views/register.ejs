@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="es">
+<!-- Include Head -->
+<%- include('./partials/head') %>
+
+
+<body>
+    <!-- Header -->
+    <% if (locals.user !=undefined) { %>
+        <%- include('./partials/headerLogueado') %>
+            <% } else { %>
+                <%- include('./partials/header') %>
+                      <% } %>
+                        <!-- /Header -->
+
+    <!-- Novedades -->
+    <div class="container products-wrapper">
+        <div class="row">
+            <div class="col-12">
+                <h2 class="products-title">Registrate</h2>
+            </div>
+            <!-- Show the "ultimos" products -->
+           
+        <form class='formulario' action="/user/register"  method="POST">
+            <label class= 'LabelForm'> Email:</label>
+            <input class= 'CampoForm' id="mailUsuario" type="email" name="mail" value="">
+            <% if (locals.errors && errors.mail) { %>
+             <p class="error"><%= errors.mail.msg %></p>
+            <% } %>
+
+            <label class= 'LabelForm'> Nombre usuario:</label>
+            <input class= 'CampoForm' id="usuarioUsuario" type="text" name="usuario" value="">
+            <% if (locals.errors && errors.usuario) { %>
+                <p class="error"><%= errors.usuario.msg %></p>
+               <% } %>
+
+            <label class= 'LabelForm'> Contraseña:</label>
+            <input class= 'CampoForm' id="contrasenaUsuario" type="password" name="pass" value="">
+            <% if (locals.errors && errors.pass) { %>
+                <p class="error"><%= errors.pass.msg %></p>
+               <% } %>
+
+            <label class= 'LabelForm'> Fecha de nacimiento:</label>
+            <input class= 'CampoForm' id="fechaUsuario" type="date" name="nacimiento" value="">
+
+
+            <label class= 'LabelForm'> Número de documento:</label>
+            <input class= 'CampoForm' id="documentoUsuario" type="number" name="documento" value="">
+
+
+            <label class= 'LabelForm'>Foto de perfil:</label>
+            <input class= 'CampoForm' id="fotoPerfilUsuario" type="text" name="foto" value="">
+
+            <button class="button">Registrarme</button>
+        </form>
+
+    <!-- footer -->
+    <%- include('./partials/footer')%>
+    <!-- /footer -->
+
+</body>
+</html>

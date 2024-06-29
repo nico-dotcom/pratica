@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="es">
+<!-- Include Head -->
+<%- include('./partials/head') %>
+<body>
+  <!-- Header -->
+  <% if (locals.user != undefined) { %>
+    <%- include('./partials/headerLogueado') %>
+ <% } else { %>
+    <%- include('./partials/header') %>
+  <% } %>
+<!-- /Header -->
+
+	<!-- product detail -->
+    <div class="container products-wrapper">
+        <div class="d-flex align-items-center">
+            <h2 class="products-title"><%= lista.nombre_producto %></h2>
+            <p class="product-detail-description">
+
+                <% if (locals.user != undefined) { %>
+
+                <% if (locals.user.id_usuario == lista.Usuario.id_usuario) { %>
+                <a href="/product/edit/<%= lista.id_producto %>">Editar</a>
+
+                <form action="/product/delete/<%= lista.id_producto %>" method="post">
+                    <input type="hidden" name="id_producto" value="<%= lista.id_producto %>">
+                    <input type="hidden" name="id_usuario" value="<%= lista.id_usuario %>">
+                    <button class="button" type="submit">Eliminar</button>
+                  </form>
+            </p>
+            <% }  %>
+            <% }  %>
+
+        </div>
+        <a href="/user/profile/id/<%=lista.Usuario.id_usuario %>"> <p> Agregado por:<%= lista.Usuario.nombre_usuario %> </p></a>
+
+        <div class="product-detail">
+            <div class="row">
+                <article class="col-12 col-lg-8 product-detail-info">
+                    <img src = <%= lista.imagen_producto %> alt="" class="product-detail-img">
+                    <p class="product-detail-description">
+                        <%= lista.descripcion %> </p>      
+                 
+                </article>
+                <div class="col-12 col-lg-4">
+                    <section class="comments">
+                        <% for (let i = 0; i < lista.Comentario.length; i++) { %>
+                            <article>
+                                <img src= <%= lista.Comentario[i].Usuario.foto %> alt="">
+                                <div class="data">
+                                    <p class="user">                  
+                                    <strong> <a href="/user/profile/id/<%=lista.Comentario[i].id_usuario %>"><%= lista.Comentario[i].Usuario.nombre_usuario %></a> </strong> <br>
+                                     <a href="/user/profile/id/<%=lista.Comentario[i].id_usuario %>"><%= lista.Comentario[i].comentario %></a></a>
+                                    </p>
+                                </div>
+                            </article>
+                           
+                        <%} %>
+                </section>
+
+                <% if (locals.user != undefined) { %>
+                    <form class="form" action="/product" method="POST">
+                        <input type="hidden" name="id" value="<%= lista.id_producto %>">
+                        <input class="form-input" type="text" value="" placeholder="Agregar comentario" name="comentario">
+                        <button type="submit" class="buy-now-button">AGREGAR COMENTARIO</button>
+                        <% if (locals.errors && errors.comentario) { %>
+                            <p class="error"><%= errors.comentario.msg %></p>
+                        <% } %>
+                    </form>
+                 <% } else { %>
+                    <p class="error">Debes estar logueado para comentar</p>
+                <% } %>
+                    <hr>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- /product detail -->
+
+    <!-- footer -->
+    <%- include('./partials/footer')%>
+    <!-- /footer -->
+
+</body>
