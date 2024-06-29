@@ -21,10 +21,10 @@
                                     </div>
 
                                     <!-- Show the "ultimos" products -->
-                                    <form class='formulario' action="/user/login" method="POST">
+                                    <form class='formulario' action="/user/login" method="GET">
                                         <label class='LabelForm' id="email">Email:</label>
 
-                                        <input class='CampoForm' type="email" name="email" value="">
+                                        <input class='CampoForm' type="email" name="correo" value="">
                                         <% if (locals.errors && errors.email) { %>
                                             <p class="error">
                                                 <%= errors.email.msg %>

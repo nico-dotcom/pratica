@@ -1,7 +1,6 @@
 var express = require('express');
 const userController = require('../controllers/userController');
 var router = express.Router();
-const db = require('../database/models')
 const { body } = require('express-validator');
 const { Op } = require('sequelize');
 const bcrypt = require("bcryptjs");
@@ -108,6 +107,7 @@ router.get('/register', userController.register);
 
 router.post('/register', validations, userController.store);
 
+router.get('/profile/id/:id', userController.profile);
 
 
 

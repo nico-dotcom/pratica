@@ -1,4 +1,4 @@
-const db = require('../database/models');
+const db = require("../database/models");
 const { Association } = require('sequelize');
 const indexController = {
     index: function (req, res) {
