@@ -23,7 +23,7 @@ const productosController = {
 
             };
 
-            db.Comentario.create(nuevoComment)
+            db.Comentario.create(ComentarioNuevo)
                 .then((result) => {
                     return res.redirect("/product/id/" + infoComment.id);
                 })
@@ -234,23 +234,7 @@ const productosController = {
                     return console.log(err);
                 });
 
-        } else {
-
-            db.Producto.findByPk(id)
-                .then(function (resultado) {
-                    return res.render('product-edit.ejs', {
-                        errors: errorrs.mapped(),
-                        old: req.body,
-                        producto: resultado
-                    });
-
-                }).catch(function (errores) {
-                    return console.log(errores);;
-                })
-
-
-
-        };
+        } ;
     }
 };
 

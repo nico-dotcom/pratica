@@ -42,7 +42,7 @@ app.use(function(req, res, next) {
 app.use(function(req, res, next) {
   
   if (req.cookies.userId != undefined && req.session.user == undefined) {
-    let idUsuario = req.cookies.userId; 
+    let idUsuario = req.cookies.usuario_id; 
 
     db.Usuario.findByPk(idUsuario)
     .then((result) => {
